@@ -12,8 +12,7 @@ if [ -f "${NGINX_CONF}.template" ]; then
     envsubst < "${NGINX_CONF}.template" > "${NGINX_CONF}"
 fi
 
-local nginx_conf_d = /opt/app-root/etc/nginx.conf.d
-for file in `find ${nginx_conf_d} -name *.template`; do
+for file in `find /opt/app-root/etc/nginx.conf.d -name *.template`; do
     envsubst < "${file}" > "${file%\.template}"
 done
 

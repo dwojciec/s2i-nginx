@@ -55,8 +55,8 @@ copy_aux_dir() {
 }
 
 test_config() {
-    local nginx_conf = /opt/app-root/etc/nginx.conf
-    local nginx_conf_d = /opt/app-root/etc/nginx.conf.d
+    local nginx_conf=/opt/app-root/etc/nginx.conf
+    local nginx_conf_d=/opt/app-root/etc/nginx.conf.d
     if [ -f "${nginx_conf}.template" ]; then
         envsubst < "${nginx_conf}.template" > "${nginx_conf}"
     fi
