@@ -60,11 +60,17 @@ copy_aux_dir() {
 test_config() {
     local nginx_conf=/opt/app-root/etc/nginx.conf
     local nginx_conf_d=/opt/app-root/etc/nginx.conf.d
+    local nginx_aux_dir=/opt/app-root/etc/aux
+
     if [ -f "${nginx_conf}.template" ]; then
         envsubst < "${nginx_conf}.template" > "${nginx_conf}"
     fi
 
     for file in `find ${nginx_conf_d} -name *.template`; do
+        envsubst < "${file}" > "${file%\.template}"
+    done
+
+    for file in `find ${nginx_aux_dir} -name *.template`; do
         envsubst < "${file}" > "${file%\.template}"
     done
 
