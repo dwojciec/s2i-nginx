@@ -16,4 +16,8 @@ for file in `find /opt/app-root/etc/nginx.conf.d -name *.template`; do
     envsubst < "${file}" > "${file%\.template}"
 done
 
+for file in `find /opt/app-root/etc/aux -name *.template`; do
+    envsubst < "${file}" > "${file%\.template}"
+done
+
 exec ${NGINX_BASE_DIR}/usr/sbin/nginx -c "$NGINX_CONF"
