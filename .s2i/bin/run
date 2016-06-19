@@ -8,16 +8,16 @@
 #
 NGINX_CONF=${NGINX_CONF-/opt/app-root/etc/nginx.conf}
 
-if [ -f "${NGINX_CONF}.template" ]; then
-    envsubst < "${NGINX_CONF}.template" > "${NGINX_CONF}"
-fi
-
-for file in `find /opt/app-root/etc/nginx.conf.d -name *.template`; do
-    envsubst < "${file}" > "${file%\.template}"
-done
-
-for file in `find /opt/app-root/etc/aux -name *.template`; do
-    envsubst < "${file}" > "${file%\.template}"
-done
+#if [ -f "${NGINX_CONF}.template" ]; then
+#    envsubst < "${NGINX_CONF}.template" > "${NGINX_CONF}"
+#fi
+#
+#for file in `find /opt/app-root/etc/nginx.conf.d -name *.template`; do
+#    envsubst < "${file}" > "${file%\.template}"
+#done
+#
+#for file in `find /opt/app-root/etc/aux -name *.template`; do
+#    envsubst < "${file}" > "${file%\.template}"
+#done
 
 exec ${NGINX_BASE_DIR}/usr/sbin/nginx -c "$NGINX_CONF"
