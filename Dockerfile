@@ -1,4 +1,4 @@
-FROM openshift/base-centos7
+FROM centos:centos7
 
 MAINTAINER Tobias Florek <tob@butter.sh>
 
@@ -6,11 +6,14 @@ ENV NGINX_VERSION 1.8
 ENV NGINX_BASE_DIR /opt/rh/rh-nginx18/root
 ENV NGINX_VAR_DIR /var/opt/rh/rh-nginx18
 
-LABEL io.k8s.description="Platform for serving nginx-based applications (static files)" \
-      io.k8s.display-name="nginx builder ${NGINX_VERSION}" \
+LABEL io.k8s.description="Platform for running nginx or building nginx-based application" \
+      io.k8s.display-name="Nginx 1.8 builder" \
       io.openshift.expose-services="8080:http" \
-      io.openshift.tags="builder,nginx,webserver"
-
+      io.openshift.tags="builder,nginx,nginx18" \
+      Name="centos/s2i-nginx-18-centos7" \
+      Version="1.8" \
+      Release="1" \
+      Architecture="x86_64"
 
 RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh \
  && yum install --setopt=tsflags=nodocs -y bcrypt rh-nginx${NGINX_VERSION/\./} \

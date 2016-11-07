@@ -1,0 +1,10 @@
+---
+kind: "ImageStream"
+apiVersion: "v1"
+metadata:
+  description: "This is a s2i for nginx 1.8"
+  name: s2i-nginx
+spec:
+  dockerImageRepository: "goern/s2i-nginx"
+  tags:
+    - name: latest
