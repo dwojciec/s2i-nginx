@@ -1,24 +1,21 @@
 apiVersion: v1
 kind: BuildConfig
 metadata:
-  name: s2i-nginx
+  name: s2i-nginx-acme
   labels:
-    application: s2i-nginx
+    application: s2i-nginx-acme
 spec:
   triggers:
-    -
-      type: ConfigChange
-  runPolicy: Serial
+    - type: ConfigChange
   source:
     type: Git
     git:
-      uri: https://github.com/goern/s2i-nginx
+      uri: http://gogs-acme-dev-infra.apps.acme.e2e.bos.redhat.com/it-dev/s2i-nginx.git
+    ref: acme-it-dev
   strategy:
     type: Docker
     dockerStrategy:
   output:
     to:
       kind: ImageStreamTag
-      name: 's2i-nginx:latest'
-  resources:
-  postCommit:
+      name: 's2i-nginx-acme:latest'
