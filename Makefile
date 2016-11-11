@@ -1,5 +1,4 @@
-
-IMAGE_NAME = s2i-nginx
+IMAGE_NAME = s2i-nginx-acme
 
 build:
 	docker build -t $(IMAGE_NAME) .
