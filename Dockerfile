@@ -1,4 +1,4 @@
-FROM s2i-nginx 
+FROM goern/s2i-nginx 
 
 MAINTAINER ACME Corp IT-Dev 
 

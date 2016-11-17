@@ -14,7 +14,7 @@ spec:
   source:
     type: Git
     git:
-      uri: http://gogs-acme-dev-infra.apps.acme.e2e.bos.redhat.com/it-dev/s2i-nginx.git
+      uri: https://github.com/goern/s2i-nginx.git
     ref: acme-it-dev
   strategy:
     type: Docker
