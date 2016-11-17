@@ -15,7 +15,7 @@ spec:
     type: Git
     git:
       uri: https://github.com/goern/s2i-nginx.git
-    ref: acme-it-dev
+      ref: acme-it-dev
   strategy:
     type: Docker
     dockerStrategy:
