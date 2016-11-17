@@ -4,6 +4,6 @@ MAINTAINER ACME Corp IT-Dev
 
 LABEL Release="5"
 
-USER default
+USER 10001 
 
 COPY ./etc/ /opt/app-root/etc
