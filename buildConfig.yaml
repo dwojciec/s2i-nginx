@@ -7,6 +7,10 @@ metadata:
 spec:
   triggers:
     - type: ConfigChange
+    - type: ImageChange
+      imageChange:
+        kind: ImageStreamTag
+        name: s2i-nginx:latest
   source:
     type: Git
     git:
