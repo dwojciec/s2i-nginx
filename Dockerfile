@@ -6,7 +6,7 @@ ENV NGINX_VERSION=1.8 \
     NGINX_BASE_DIR=/opt/rh/rh-nginx18/root \
     NGINX_VAR_DIR=/var/opt/rh/rh-nginx18 \
     NGINX_USER=www \
-    USER_UID=10001
+    USER_UID=1174
 
 LABEL io.k8s.description="Platform for running nginx or building nginx-based application" \
       io.k8s.display-name="Nginx 1.8 builder" \
