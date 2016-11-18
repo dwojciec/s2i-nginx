@@ -6,7 +6,8 @@ ENV NGINX_VERSION=1.8 \
     NGINX_BASE_DIR=/opt/rh/rh-nginx18/root \
     NGINX_VAR_DIR=/var/opt/rh/rh-nginx18 \
     NGINX_USER=www \
-    USER_UID=1174
+    USER_UID=1174 \
+    APP_ROOT=/opt/app-root
 
 LABEL io.k8s.description="Platform for running nginx or building nginx-based application" \
       io.k8s.display-name="Nginx 1.8 builder" \
@@ -31,8 +32,10 @@ RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh && \
 COPY ./etc/ /opt/app-root/etc
 COPY ./.s2i/bin/ ${STI_SCRIPTS_PATH}
 
-RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf
-RUN chown -R ${USER_UID} /opt/app-root
+RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf && \
+    chown -R ${USER_UID}:0 ${APP_ROOT} && \
+    chmod -R g+rw ${APP_ROOT} && \
+    find ${APP_ROOT} -type d -exec chmod g+x {} +
 
 USER ${USER_UID}
 
