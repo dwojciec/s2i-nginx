@@ -96,5 +96,8 @@ copy_static_files
 copy_server_configs
 copy_aux_dir
 
+chgrp -R 0 /opt/app-root
+chmod -R g+r /opt/app-root
+
 test_config
 cleanup
