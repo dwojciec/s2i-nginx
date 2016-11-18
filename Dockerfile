@@ -35,7 +35,6 @@ RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d
     chown -R ${USER_UID}:0 ${APP_ROOT} && \
     chown -R ${USER_UID}:0 $HOME && \
     chmod -R ug+rw ${APP_ROOT} && \
-    chmod -R g+w ${APP_ROOT}/src/html && \
     find ${APP_ROOT} -type d -exec chmod g+x {} +
 
 USER ${USER_UID}
