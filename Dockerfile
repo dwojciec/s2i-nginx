@@ -32,10 +32,7 @@ COPY ./etc/ /opt/app-root/etc
 COPY ./.s2i/bin/ ${STI_SCRIPTS_PATH}
 
 RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf && \
-    chown -R ${USER_UID}:0 ${APP_ROOT} && \
-    chown -R ${USER_UID}:0 $HOME && \
-    chmod -R ug+rw ${APP_ROOT} && \
-    find ${APP_ROOT} -type d -exec chmod g+x {} +
+    chown -R ${USER_UID}:${USER_UID} /opt/app-root
 
 USER ${USER_UID}
 
