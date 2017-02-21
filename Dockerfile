@@ -6,7 +6,7 @@ ENV NGINX_VERSION=1.8 \
     NGINX_BASE_DIR=/opt/rh/rh-nginx18/root \
     NGINX_VAR_DIR=/var/opt/rh/rh-nginx18 \
     NGINX_USER=www \
-    USER_UID=10001
+    USER_UID=1001
 
 LABEL io.k8s.description="Platform for running nginx or building nginx-based application" \
       io.k8s.display-name="Nginx 1.8 builder" \
@@ -20,7 +20,6 @@ LABEL io.k8s.description="Platform for running nginx or building nginx-based app
 RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh && \
     yum install --setopt=tsflags=nodocs -y bcrypt rh-nginx${NGINX_VERSION/\./} && \
     yum clean all -y && \
-    useradd -l -u ${USER_UID} -r -g 0 -m -s /sbin/nologin -c "nginx user" ${NGINX_USER} && \
     mkdir -p /opt/app-root/etc/nginx.conf.d /opt/app-root/run && \
     chmod -R a+rx  $NGINX_VAR_DIR/lib/nginx && \
     chmod -R a+rwX $NGINX_VAR_DIR/lib/nginx/tmp \
@@ -38,4 +37,4 @@ USER ${USER_UID}
 
 EXPOSE 8080
 
-CMD ["usage"]
+CMD ["/usr/libexec/s2i/usage"]
