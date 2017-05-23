@@ -17,13 +17,7 @@ LABEL io.k8s.description="Platform for running nginx or building nginx-based app
       Release="4" \
       Architecture="x86_64"
 
-# When bash is started non-interactively, to run a shell script, for example it
-# looks for this variable and source the content of this file. This will enable
-# the SCL for all scripts without need to do 'scl enable'.
-COPY contrib/scl_enable /opt/app-root/etc/scl_enable
-ENV BASH_ENV=/opt/app-root/etc/scl_enable \
-    ENV=/opt/app-root/etc/scl_enable \
-    PROMPT_COMMAND=". /opt/app-root/etc/scl_enable"
+
     
 RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh && \
     yum install --setopt=tsflags=nodocs -y bcrypt rh-nginx${NGINX_VERSION/\./} && \
@@ -37,6 +31,17 @@ RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh && \
 
 COPY ./etc/ /opt/app-root/etc
 COPY ./.s2i/bin/ ${STI_SCRIPTS_PATH}
+
+
+# When bash is started non-interactively, to run a shell script, for example it
+# looks for this variable and source the content of this file. This will enable
+# the SCL for all scripts without need to do 'scl enable'.
+COPY contrib/scl_enable /opt/app-root/etc/scl_enable
+ENV BASH_ENV=/opt/app-root/etc/scl_enable \
+    ENV=/opt/app-root/etc/scl_enable \
+    PROMPT_COMMAND=". /opt/app-root/etc/scl_enable"
+    
+    
 
 RUN cp /opt/app-root/etc/nginx.server.sample.conf /opt/app-root/etc/nginx.conf.d/default.conf
 RUN chown -R ${USER_UID} /opt/app-root
